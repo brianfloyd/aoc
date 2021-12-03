@@ -1,0 +1,39 @@
+const fs = require('fs');
+let dataset;
+fs.readFile('day3\ input.txt', 'utf8' , (err, data) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+    dataset=data.split('\n');
+  parseGamma(dataset)
+  });
+
+  let gamma=[0,0,0,0,0,0,0,0,0,0,0,0];
+  let epsilon =[];
+  let powerConsumption;
+
+  //1000010101
+  function parseGamma(data){
+    data.forEach((val,index)=>{
+        let eachVal = (val.split(''));
+        for(let num in val){
+            if(val[num]==0)gamma[num]=gamma[num]-1
+            else gamma[num]=gamma[num]+1
+        }
+        for(let num in gamma){
+            if(gamma[num]<=0){
+                gamma[num]=0
+                epsilon[num]=1
+            }else{
+                gamma[num]=1
+                epsilon[num]=0
+            }
+        }
+    })
+  
+   powerConsumption =(parseInt(gamma.join(''),2)*parseInt(epsilon.join(''),2))
+   console.log(powerConsumption)
+   //output is currently 3949700
+  }
+
